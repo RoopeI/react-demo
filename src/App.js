@@ -7,16 +7,16 @@ import UserOutput from './UserOutput';
 class App extends Component {
   state = {
     users: [
-      {username:"Roope", age: 43},
-      {username:"Sini", age: 40}
+      {username:"Roope", age: 55},
+      {username:"Leo", age: 45}
     ]
   };
 
   changeUserState = (event) => {
     this.setState(
       {users: [
-        {username:event.target.value, age: 43},
-        {username:"Sini", age: 40}
+        {username:event.target.value, age: 55},
+        {username:"Leo", age: 45}
       ]}
     );
   }
