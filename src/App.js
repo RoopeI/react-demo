@@ -1,18 +1,32 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import UserInput from './UserInput';
+import UserOutput from './UserOutput';
 
 class App extends Component {
+  state = {
+    users: [
+      {username:"Roope", age: 43},
+      {username:"Sini", age: 40}
+    ]
+  };
+
+  changeUserState = (event) => {
+    this.setState(
+      {users: [
+        {username:event.target.value, age: 43},
+        {username:"Sini", age: 40}
+      ]}
+    );
+  }
+
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <UserInput trigger={this.changeUserState} value={this.state.users[0].username} />
+        <UserOutput username={this.state.users[0].username} age={this.state.users[0].age} /> 
+        <UserOutput username={this.state.users[1].username} age={this.state.users[1].age} />        
       </div>
     );
   }
