@@ -1,18 +1,36 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
+import ValidationComponent from './ValidationComponent';
+import CharComponent from './CharComponent';
+
 class App extends Component {
+
+  state = {
+    text : []
+  }
+
+  inputChange = (event) => {
+    const value =  event.target.value.split('');
+    this.setState({text: value});
+  }
+
+  textClick = (index) => {
+    const text = [...this.state.text];
+    text.splice(index, 1);
+    this.setState({text: text});
+  }
+
   render() {
+    const chars = this.state.text.map((element, index) => {
+      return <CharComponent char={element} key={index} click={() => this.textClick(index)} />
+    });
+    const value = this.state.text.join('');
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <input type="text" onChange={(event) => this.inputChange(event)} value={value} />
+        <ValidationComponent  length={this.state.text.length} />
+        {chars}
       </div>
     );
   }
